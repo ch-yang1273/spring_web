@@ -64,42 +64,8 @@ public class Posts {
 }
 ```
 
-- 필자는 주요 어노테이션을 클래스에 가깝게 두는 편이다. Lombok 어노테이션을 필수 어노테이션이 아니여서 위쪽에 두었다.
+- 필자는 주요 어노테이션을 클래스에 가깝게 두는 편이다. Lombok 어노테이션은 필수 어노테이션이 아니여서 위쪽에 두었다.
 - Entity 클래스에서는 절대 Setter 메서드를 만들지 않는다.
-- JpaRepository 생성 후 테스트
-
-    ```powershell
-    //table 생성
-    Hibernate: 
-        
-        create table posts (
-           id bigint not null auto_increment,
-            author varchar(255),
-            content TEXT not null,
-            title varchar(500) not null,
-            primary key (id)
-        ) engine=InnoDB
-    
-    //데이터 삽입
-    Hibernate: 
-        insert 
-        into
-            posts
-            (author, content, title) 
-        values
-            (?, ?, ?)
-    
-    //데이터 조회
-    Hibernate: 
-        select
-            posts0_.id as id1_0_,
-            posts0_.author as author2_0_,
-            posts0_.content as content3_0_,
-            posts0_.title as title4_0_ 
-        from
-            posts posts0_
-    ```
-
 
 ### 등록/수정/조회 API 만들기
 
@@ -111,12 +77,18 @@ public class Posts {
 
 ## 04. 머스테치로 화면 구성하기 (Thymeleaf)
 
-공부한 Thymeleaf를 써먹기 위해 Mustache 대신 Thymeleaf를 사용하겠다.
+공부한 Thymeleaf를 써먹기 위해 Mustache 대신 Thymeleaf를 사용했다.
 
-[Thymeleaf - Basic](https://ch-yang.tistory.com/20)
+Blog : [Thymeleaf - Basic](https://ch-yang.tistory.com/20)
 
-### CSS, JS 외부 CDN 사용
+### 공통 레이아웃 템플릿
+[layoutFile.html](https://github.com/ch-yang1273/spring_web/blob/c58057ed366dd1e222ec895acffdec1e337e0d06/src/main/resources/templates/layout/layoutFile.html)
 
-[Official CDN of Bootstrap and Font Awesome](https://www.bootstrapcdn.com/)
+### 게시글 목록
+[index.html](https://github.com/ch-yang1273/spring_web/blob/c58057ed366dd1e222ec895acffdec1e337e0d06/src/main/resources/templates/index.html)
 
-**Bootstrap v4.6.2** CSS, JS를 가져왔다.
+### 게시글 등록
+[posts-save.html](https://github.com/ch-yang1273/spring_web/blob/c58057ed366dd1e222ec895acffdec1e337e0d06/src/main/resources/templates/form/posts-save.html)
+
+### 게시글 수정, 삭제
+[posts-update.html](https://github.com/ch-yang1273/spring_web/blob/c58057ed366dd1e222ec895acffdec1e337e0d06/src/main/resources/templates/form/posts-update.html)
