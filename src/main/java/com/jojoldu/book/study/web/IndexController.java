@@ -1,6 +1,6 @@
 package com.jojoldu.book.study.web;
 
-import com.jojoldu.book.study.domain.posts.Posts;
+import com.jojoldu.book.study.config.auth.dto.SessionUser;
 import com.jojoldu.book.study.service.posts.PostsService;
 import com.jojoldu.book.study.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -18,10 +18,16 @@ import java.util.ArrayList;
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model) {
         model.addAttribute("posts", postsService.findAllDesc());
+
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("userName", user.getName());
+        }
         return "index";
     }
 
