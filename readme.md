@@ -12,54 +12,7 @@
 
 ### Hello Controller Test
 
-```java
-package com.jojoldu.book.study.web;
-
-import org.hamcrest.Matchers;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-//RunWith(SpringRunner.class)
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(controllers = HelloController.class)
-class HelloControllerTest {
-
-    @Autowired
-    private MockMvc mvc;
-
-    @Test
-    public void hello가_리턴된다() throws Exception {
-        String hello = "hello";
-
-        mvc.perform(MockMvcRequestBuilders.get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(hello));
-    }
-
-    @Test
-    public void helloDto가_리턴된다() throws Exception {
-        String name = "hello";
-        int amount = 1000;
-
-        mvc.perform(
-                        MockMvcRequestBuilders.get("/hello/dto")
-                                .param("name", name)
-                                .param("amount", String.valueOf(amount)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.name", Matchers.is(name)))
-                .andExpect(jsonPath("$.amount", Matchers.is(amount)));
-
-    }
-}
-```
+[HelloControllerTest.java](https://github.com/ch-yang1273/spring_web/blob/da78d465273302fe35731b7d35c4b497f087bc7a/src/test/java/com/jojoldu/book/study/web/HelloControllerTest.java)
 
 [[백기선] ****AssertJ가 JUnit의 assertThat 보다 편리한 이유****](https://www.notion.so/AssertJ-JUnit-assertThat-ef63aa31b07a49a8a12b518a7e568467)
 
@@ -155,3 +108,15 @@ public class Posts {
 - 이 책에서는 도메인 모델을 다룬다.
 
 [JPA Auditing](https://www.notion.so/JPA-Auditing-6d5385827f64412abd49dc91233b03f5)
+
+## 04. 머스테치로 화면 구성하기 (Thymeleaf)
+
+공부한 Thymeleaf를 써먹기 위해 Mustache 대신 Thymeleaf를 사용하겠다.
+
+[Thymeleaf - Basic](https://ch-yang.tistory.com/20)
+
+### CSS, JS 외부 CDN 사용
+
+[Official CDN of Bootstrap and Font Awesome](https://www.bootstrapcdn.com/)
+
+**Bootstrap v4.6.2** CSS, JS를 가져왔다.

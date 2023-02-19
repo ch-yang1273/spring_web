@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/layoutFile :: layout(~{::title},~{::section},~{::script})}" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!--/* 파라미터로 넘어간다. */-->
+  <title>스프링 부트 웹서비스</title>
+</head>
+<body>
+<!--/* 파라미터로 넘어간다. */-->
+<section>
+  <h1>스프링 부트로 시작하는 웹 서비스 Ver.2</h1>
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+      </div>
+    </div>
+    <br>
+    <table class="table table-horizontal table-bordered">
+      <thead class="thead-strong">
+      <tr>
+        <th>게시글번호</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>최종수정일</th>
+      </tr>
+      </thead>
+      <tbody id="tbody" th:each="post, postStat : ${posts}">
+      <tr>
+        <td th:text="${post.id}">id</td>
+        <td>
+          <a href="/" th:href="@{/posts/update/{id}(id=${post.id})}" th:text="${post.title}">title</a>
+        </td>
+        <td th:text="${post.author}">author</td>
+        <td th:text="${post.modifiedDate}">modifiedDate</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</body>
+</html>
